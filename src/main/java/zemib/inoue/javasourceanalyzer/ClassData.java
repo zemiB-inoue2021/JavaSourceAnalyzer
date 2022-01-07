@@ -1,8 +1,8 @@
 package zemib.inoue.javasourceanalyzer;
 
 public class ClassData extends Node{
-	private int noa;
-	private int noi;
+	public int noa;
+	public int noi;
 	
 	public void setNoa(int noa) {
 		this.noa = noa;

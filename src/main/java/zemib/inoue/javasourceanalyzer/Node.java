@@ -1,6 +1,9 @@
 package zemib.inoue.javasourceanalyzer;
 
 public class Node {
+
+	public String nodename;
+
 	public String getNodename() {
 		return nodename;
 	}
@@ -8,6 +11,5 @@ public class Node {
 	public void setNodename(String nodename) {
 		this.nodename = nodename;
 	}
-	
-	private String nodename;
+
 }
