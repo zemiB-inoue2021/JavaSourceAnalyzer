@@ -1,13 +1,21 @@
 package zemib.inoue.javasourceanalyzer;
 
-import java.util.HashMap;
+import java.util.List;
 
 public class Directory extends Node {
-	public HashMap<String, Node> nodemap;
+	public String name;
+	public List<Node> children;
 
-	public void putNodeMap(String s, Node n) {
-		nodemap.put(s, n);
+	public void addChild(Node n) {
+		children.add(n);
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }

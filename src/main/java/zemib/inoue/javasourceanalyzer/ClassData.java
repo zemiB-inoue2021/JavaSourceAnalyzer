@@ -1,6 +1,7 @@
 package zemib.inoue.javasourceanalyzer;
 
 public class ClassData extends Node{
+	public String classname;
 	public int noa;
 	public int noi;
 	
@@ -18,5 +19,13 @@ public class ClassData extends Node{
 
 	public int getNoi() {
 		return noi;
+	}
+	
+	public String getClassname() {
+		return classname;
+	}
+
+	public void setClassname(String classname) {
+		this.classname = classname;
 	}
 }

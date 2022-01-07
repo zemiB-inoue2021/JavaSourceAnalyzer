@@ -9,7 +9,7 @@ import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 public class ZemiBVoidVisitor extends VoidVisitorAdapter<String> {
-	private CodesData codesdata = new CodesData();
+	private ClassData classdata = new ClassData();
 	
 	@Override
 	public void visit(VariableDeclarator n, String arg) {
@@ -41,7 +41,7 @@ public class ZemiBVoidVisitor extends VoidVisitorAdapter<String> {
 		super.visit(n, arg);
 	}
 	
-	public CodesData getCodesData() {
-		return this.codesdata;
+	public ClassData getClassData() {
+		return this.classdata;
 	}
 }

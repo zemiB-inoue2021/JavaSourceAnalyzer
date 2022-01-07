@@ -1,7 +1,6 @@
 package zemib.inoue.javasourceanalyzer;
 
 public class Node {
-
 	public String nodename;
 
 	public String getNodename() {

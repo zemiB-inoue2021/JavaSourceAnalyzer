@@ -2,11 +2,11 @@ package zemib.inoue.javasourceanalyzer;
 
 import java.util.HashMap;
 
-public class CodesData {
-	public HashMap<String, Directory> directorymap;
+public class ProjectData {
+	public HashMap<String, Directory> project;
 
 	public void putDirectoryMap(String s, Directory n) {
-		directorymap.put(s, n);
+		project.put(s, n);
 	}
 
 }
