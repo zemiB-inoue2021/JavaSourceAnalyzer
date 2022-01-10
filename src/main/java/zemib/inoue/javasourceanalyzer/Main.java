@@ -12,18 +12,18 @@ import com.github.javaparser.ast.CompilationUnit;
 public class Main {
 	public static void main(String[] args) {
 		Path source = Paths.get("src/main/java/zemib/inoue/javasourceanalyzer/Main.java");
-		ProjectData projectdata = new ProjectData();
+
 		try {
 			JavaParser parser = new JavaParser();
 			ParseResult<CompilationUnit> result = parser.parse(source);
-			ZemiBVoidVisitor semibvoidvisitor = new ZemiBVoidVisitor();
-			
-			result.getResult().ifPresent(r -> r.accept(semibvoidvisitor, null));
-			
+			ZemiBVoidVisitor zemibvoidvisitor = new ZemiBVoidVisitor();
+			result.getResult().ifPresent(r -> r.accept(zemibvoidvisitor, null));
 			ObjectMapper mapper = new ObjectMapper();
-			String json = mapper.writeValueAsString(semibvoidvisitor.getClassData());
+			String json = mapper.writeValueAsString(zemibvoidvisitor.getClasses());
 			System.out.println(json);
-
+			for(int i=0; i<1; i++) {
+				
+			}
 		} catch (IOException e) {
 			e.printStackTrace(System.err);
 		}
