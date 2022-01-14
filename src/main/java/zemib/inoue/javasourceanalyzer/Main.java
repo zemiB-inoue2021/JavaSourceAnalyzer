@@ -26,7 +26,7 @@ public class Main {
 						result = parser.parse(p);
 						ZemiBVoidVisitor zemibvoidvisitor = new ZemiBVoidVisitor();
 						result.getResult().ifPresent(r -> r.accept(zemibvoidvisitor, null));
-						final Package packagedata = parsedata.getPackage(zemibvoidvisitor.getPackage());
+						Package packagedata = parsedata.getPackage(zemibvoidvisitor.getPackage());
 						zemibvoidvisitor.getClasses().forEach(c -> packagedata.addClass(c));
 						zemibvoidvisitor.getInterfaces().forEach(c -> packagedata.addInterface(c));
 						zemibvoidvisitor.getEnums().forEach(c -> packagedata.addEnum(c));
