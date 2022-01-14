@@ -9,6 +9,14 @@ public class Package extends NamedNode {
 	private List<ClassorInterface> interfaces = new ArrayList<ClassorInterface>();
 	private List<Enum> enums = new ArrayList<Enum>();
 
+	Package(){
+		
+	}
+	
+	Package(String name){
+		this.name = name;
+	}
+	
 	public List<ClassorInterface> getClasses() {
 		return classes;
 	}

@@ -18,4 +18,12 @@ public class ParseData {
 		this.packages.add(p);
 	}
 
+	public Package getPackage(String s) {
+		for (Package p : packages) {
+			if (p.getName() == s) {
+				return p;
+			}
+		}
+		return new Package(s);
+	}
 }
