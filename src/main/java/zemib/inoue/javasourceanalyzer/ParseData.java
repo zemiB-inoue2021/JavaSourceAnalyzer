@@ -24,6 +24,8 @@ public class ParseData {
 				return p;
 			}
 		}
-		return new Package(s);
+		Package newpackage = new Package(s);
+		packages.add(newpackage);
+		return newpackage;
 	}
 }

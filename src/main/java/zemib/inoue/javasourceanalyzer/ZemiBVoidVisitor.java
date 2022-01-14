@@ -15,14 +15,16 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 public class ZemiBVoidVisitor extends VoidVisitorAdapter<String> {
 
+	private String packagename;
 	private MethodedNode currentnode;
 	private Method currentmethod;
 	private List<ClassorInterface> classes = new ArrayList<ClassorInterface>();
 	private List<ClassorInterface> interfaces = new ArrayList<ClassorInterface>();
 	private List<Enum> enums = new ArrayList<Enum>();
-	
+
 	@Override
 	public void visit(PackageDeclaration n, String arg) {
+		this.packagename = n.getNameAsString();
 		super.visit(n, arg);
 	}
 
@@ -65,19 +67,19 @@ public class ZemiBVoidVisitor extends VoidVisitorAdapter<String> {
 		currentnode = e;
 		super.visit(n, arg);
 	}
-	
+
 	@Override
 	public void visit(IfStmt n, String arg) {
 		currentmethod.incCyclo();
 		super.visit(n, arg);
 	}
-	
+
 	@Override
 	public void visit(WhileStmt n, String arg) {
 		currentmethod.incCyclo();
 		super.visit(n, arg);
 	}
-	
+
 	@Override
 	public void visit(ForStmt n, String arg) {
 		currentmethod.incCyclo();
@@ -97,4 +99,11 @@ public class ZemiBVoidVisitor extends VoidVisitorAdapter<String> {
 		return interfaces;
 	}
 
+	public List<Enum> getEnums() {
+		return enums;
+	}
+
+	public String getPackage() {
+		return packagename;
+	}
 }
