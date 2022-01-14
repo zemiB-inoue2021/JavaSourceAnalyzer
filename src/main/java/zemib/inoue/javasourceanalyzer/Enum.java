@@ -1,10 +1,11 @@
 package zemib.inoue.javasourceanalyzer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Enum extends MethodedNode{
 	private String name;
-	private List<String> values;
+	private List<String> values = new ArrayList<String>();
 
 	public String getName() {
 		return name;

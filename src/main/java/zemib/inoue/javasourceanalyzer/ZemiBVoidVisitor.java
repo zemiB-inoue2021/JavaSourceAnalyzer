@@ -48,7 +48,6 @@ public class ZemiBVoidVisitor extends VoidVisitorAdapter<String> {
 		method.setReturnType(n.getTypeAsString());
 		n.getParameters()
 				.forEach(param -> method.addParam(new Param(param.getNameAsString(), param.getTypeAsString())));
-		// TODO メトリクス計算
 		int startline = n.getBegin().get().line;
 		int endline = n.getEnd().get().line;
 		method.setLoc(endline - startline + 1);
@@ -70,24 +69,41 @@ public class ZemiBVoidVisitor extends VoidVisitorAdapter<String> {
 
 	@Override
 	public void visit(IfStmt n, String arg) {
-		currentmethod.incCyclo();
+		
+			currentmethod.incCyclo();
+		
 		super.visit(n, arg);
 	}
 
 	@Override
 	public void visit(WhileStmt n, String arg) {
-		currentmethod.incCyclo();
+		
+			currentmethod.incCyclo();
+		
 		super.visit(n, arg);
 	}
 
 	@Override
 	public void visit(ForStmt n, String arg) {
-		currentmethod.incCyclo();
+		
+			currentmethod.incCyclo();
+		
 		super.visit(n, arg);
 	}
 
 	@Override
 	public void visit(ConstructorDeclaration n, String arg) {
+		Method method = new Method();
+		method.setName(n.getNameAsString());
+		method.setReturnType(null);
+		n.getParameters()
+				.forEach(param -> method.addParam(new Param(param.getNameAsString(), param.getTypeAsString())));
+		int startline = n.getBegin().get().line;
+		int endline = n.getEnd().get().line;
+		method.setLoc(endline - startline + 1);
+		method.setCyclo(0);
+		currentnode.addMethod(method);
+		currentmethod = method;
 		super.visit(n, arg);
 	}
 
