@@ -17,7 +17,7 @@ public class ZemiBVoidVisitor extends VoidVisitorAdapter<String> {
 
 	private String packagename;
 	private MethodedNode currentnode;
-	private Method currentmethod;
+	private MethodOrConstructor methodorconstructor;
 	private List<ClassorInterface> classes = new ArrayList<ClassorInterface>();
 	private List<ClassorInterface> interfaces = new ArrayList<ClassorInterface>();
 	private List<Enum> enums = new ArrayList<Enum>();
@@ -53,7 +53,7 @@ public class ZemiBVoidVisitor extends VoidVisitorAdapter<String> {
 		method.setLoc(endline - startline + 1);
 		method.setCyclo(0);
 		currentnode.addMethod(method);
-		currentmethod = method;
+		methodorconstructor = method;
 		super.visit(n, arg);
 	}
 
@@ -69,41 +69,41 @@ public class ZemiBVoidVisitor extends VoidVisitorAdapter<String> {
 
 	@Override
 	public void visit(IfStmt n, String arg) {
-		
-			currentmethod.incCyclo();
-		
+
+		methodorconstructor.incCyclo();
+
 		super.visit(n, arg);
 	}
 
 	@Override
 	public void visit(WhileStmt n, String arg) {
-		
-			currentmethod.incCyclo();
-		
+
+		methodorconstructor.incCyclo();
+
 		super.visit(n, arg);
 	}
 
 	@Override
 	public void visit(ForStmt n, String arg) {
-		
-			currentmethod.incCyclo();
-		
+
+		methodorconstructor.incCyclo();
+
 		super.visit(n, arg);
 	}
 
 	@Override
 	public void visit(ConstructorDeclaration n, String arg) {
-		Method method = new Method();
-		method.setName(n.getNameAsString());
-		method.setReturnType(null);
+		Constructor constructor = new Constructor();
+		constructor.setName(n.getNameAsString());
+		constructor.setReturnType(null);
 		n.getParameters()
-				.forEach(param -> method.addParam(new Param(param.getNameAsString(), param.getTypeAsString())));
+				.forEach(param -> constructor.addParam(new Param(param.getNameAsString(), param.getTypeAsString())));
 		int startline = n.getBegin().get().line;
 		int endline = n.getEnd().get().line;
-		method.setLoc(endline - startline + 1);
-		method.setCyclo(0);
-		currentnode.addMethod(method);
-		currentmethod = method;
+		constructor.setLoc(endline - startline + 1);
+		constructor.setCyclo(0);
+		currentnode.addConstructor(constructor);
+		methodorconstructor = constructor;
 		super.visit(n, arg);
 	}
 
