@@ -1,5 +1,6 @@
 package zemib.inoue.javasourceanalyzer;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,10 +42,13 @@ public class Main {
 
 			ObjectMapper mapper = new ObjectMapper();
 			String json = mapper.writeValueAsString(parsedata);
-			System.out.println(json);
+			FileWriter filewriter = new FileWriter("json/parse.json");
+			filewriter.write(json);
+			filewriter.close();
 
 		} catch (IOException e) {
 			e.printStackTrace(System.err);
 		}
+
 	}
 }

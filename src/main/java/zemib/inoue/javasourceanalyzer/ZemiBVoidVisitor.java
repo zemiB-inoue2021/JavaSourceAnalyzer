@@ -95,7 +95,6 @@ public class ZemiBVoidVisitor extends VoidVisitorAdapter<String> {
 	public void visit(ConstructorDeclaration n, String arg) {
 		Constructor constructor = new Constructor();
 		constructor.setName(n.getNameAsString());
-		constructor.setReturnType(null);
 		n.getParameters()
 				.forEach(param -> constructor.addParam(new Param(param.getNameAsString(), param.getTypeAsString())));
 		int startline = n.getBegin().get().line;

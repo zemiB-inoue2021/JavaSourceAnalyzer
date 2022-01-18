@@ -6,7 +6,6 @@ import java.util.List;
 public abstract class MethodOrConstructor {
 	private String name;
 	private List<Param> params = new ArrayList<Param>();
-	private String returnType;
 	private int loc;
 	private int cyclo;
 
@@ -28,14 +27,6 @@ public abstract class MethodOrConstructor {
 
 	public void addParam(Param param) {
 		this.params.add(param);
-	}
-
-	public String getReturnType() {
-		return returnType;
-	}
-
-	public void setReturnType(String returnType) {
-		this.returnType = returnType;
 	}
 
 	public int getLoc() {

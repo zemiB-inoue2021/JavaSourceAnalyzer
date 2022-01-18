@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "解析データ形式",
+  "description": "JavaAnalyzerが出力する解析データの形式定義",
+  "type": "object",
+  "properties": {
+    "packages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/package"
+      }
+    }
+  },
+  "required": ["packages"],
+  "definitions": {
+    "method": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "params": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            },
+            "required": ["name", "type"]
+          }
+        },
+        "returnType": {
+          "type": "string"
+        },
+        "loc": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": {
+        "type": "number"
+      },
+      "required": ["name", "params", "returnType", "loc"]
+    },
+    "classOrInterface": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/method"
+          }
+        }
+      },
+      "required": ["name", "methods"]
+    },
+    "enum": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/method"
+          }
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["name", "methods", "values"]
+    },
+    "package": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "classes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/classOrInterface"
+          }
+        },
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/classOrInterface"
+          }
+        },
+        "enums": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/enum"
+          }
+        }
+      },
+      "required": ["name", "classes", "interfaces", "enums"]
+    }
+  }
+}

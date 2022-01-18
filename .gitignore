@@ -33,3 +33,6 @@ bin
 *.log
 *.swp
 *.bak
+
+#json
+json/parse.json
