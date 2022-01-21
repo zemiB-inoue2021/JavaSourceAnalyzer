@@ -1,5 +1,6 @@
 package zemib.inoue.javasourceanalyzer;
 
+import java.io.Console;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,7 +15,13 @@ import com.github.javaparser.ast.CompilationUnit;
 
 public class Main {
 	public static void main(String[] args) {
-		Path sourcedir = Paths.get("../enshud/src/main/java/enshud/");
+		// 解析対象ディレクトリが指定されていなければエラー
+		if(args.length != 1){
+			System.exit(1);
+			return;
+		}
+
+		Path sourcedir = Paths.get(args[0]);
 		ParseData parsedata = new ParseData();
 
 		try {
@@ -28,27 +35,28 @@ public class Main {
 						ZemiBVoidVisitor zemibvoidvisitor = new ZemiBVoidVisitor();
 						result.getResult().ifPresent(r -> r.accept(zemibvoidvisitor, null));
 						Package packagedata = parsedata.getPackage(zemibvoidvisitor.getPackage());
-						zemibvoidvisitor.getClasses().forEach(c -> packagedata.addClass(c));
-						zemibvoidvisitor.getInterfaces().forEach(c -> packagedata.addInterface(c));
-						zemibvoidvisitor.getEnums().forEach(c -> packagedata.addEnum(c));
+						zemibvoidvisitor.getClasses().forEach(packagedata::addClass);
+						zemibvoidvisitor.getInterfaces().forEach(packagedata::addInterface);
+						zemibvoidvisitor.getEnums().forEach(packagedata::addEnum);
 					} catch (IOException e) {
 						// TODO 自動生成された catch ブロック
 						e.printStackTrace();
 					}
 				});
 			} catch (IOException e) {
-				System.out.println(e);
+				e.printStackTrace();
+				System.exit(1);
+				return;
 			}
 
+			// 解析結果のJSONを標準出力に出力
 			ObjectMapper mapper = new ObjectMapper();
 			String json = mapper.writeValueAsString(parsedata);
-			FileWriter filewriter = new FileWriter("json/parse.json");
-			filewriter.write(json);
-			filewriter.close();
+			System.out.println(json);
 
 		} catch (IOException e) {
 			e.printStackTrace(System.err);
+			System.exit(1);
 		}
-
 	}
 }
