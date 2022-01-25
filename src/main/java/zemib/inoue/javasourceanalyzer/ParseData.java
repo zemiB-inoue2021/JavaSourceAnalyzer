@@ -20,7 +20,7 @@ public class ParseData {
 
 	public Package getPackage(String s) {
 		for (Package p : packages) {
-			if (p.getName() == s) {
+			if (p.getName().equals(s)) {
 				return p;
 			}
 		}

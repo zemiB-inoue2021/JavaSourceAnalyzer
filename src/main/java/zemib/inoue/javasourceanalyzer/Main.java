@@ -34,7 +34,8 @@ public class Main {
 						result = parser.parse(p);
 						ZemiBVoidVisitor zemibvoidvisitor = new ZemiBVoidVisitor();
 						result.getResult().ifPresent(r -> r.accept(zemibvoidvisitor, null));
-						Package packagedata = parsedata.getPackage(zemibvoidvisitor.getPackage());
+						var packageName = zemibvoidvisitor.getPackage();
+						Package packagedata = parsedata.getPackage(packageName != null ? packageName : "*");
 						zemibvoidvisitor.getClasses().forEach(packagedata::addClass);
 						zemibvoidvisitor.getInterfaces().forEach(packagedata::addInterface);
 						zemibvoidvisitor.getEnums().forEach(packagedata::addEnum);
